@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="img/love.ico" />
+    <title>I ♥ You Preethi</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden; /* Prevents horizontal scrolling */
+        font-family: Arial, sans-serif;
+        width: 100vw; /* Ensure body width matches viewport width */
+        height: 100%; /* Ensure body height covers viewport */
+        background-color: rgb(252, 185, 206);
+      }
+
+      /* Section Styles */
+      .section {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        scroll-snap-align: start; /* Ensures sections snap into view */
+        width: 100vw; /* Ensure section width matches viewport width */
+      }
+
+      .section-template[data-type="section-1"] {
+        background-image: url("img/IMG-20240803-WA0020.jpg");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+      }
+      
+      .section-template[data-type="section-1"]::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 0;
+        filter: blur(10px); /* Adjust blur intensity here */
+        background-image: inherit;
+        background-size: cover;
+        background-position: center;
+      }
+      
+
+      .section-template[data-type="section-1"] .content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+        margin-top: auto;
+      }
+
+      .section-template[data-type="section-1"] .content img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+      }
+
+     
+
+      /* Section 2 Styles */
+      .section-2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgb(252, 185, 206);
+        position: relative;
+        height: 100vh;
+        width: 100vw; /* Ensure section width matches viewport width */
+      }
+
+      .box-shadow-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10%;
+        background: rgb(252, 185, 206);
+        position: relative;
+        height: 100%;
+        width: 100%;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Added box shadow */
+        border-radius: 8px; /* Optional: Add rounded corners */
+        box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+      }
+
+      .image-container,
+      .quote-card {
+        transition: all 0.5s ease-in-out;
+      }
+
+      .image-container img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .quote-card {
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-left: 20px;
+      }
+
+      /* Section 3 Styles */
+      .section-3 {
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60%;
+        max-width: 500px;
+        transform: translate(-50%, -50%);
+        background: #e0e0e0;
+        padding: 20px;
+        text-align: center;
+        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+      }
+
+      /* Section 4 Styles */
+      .section-4 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #d0d0d0;
+        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        opacity: 0;
+        transform: translateY(100%);
+        padding: 20px;
+        box-sizing: border-box;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      /* Grid Layout for Section 4 */
+      .section-content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px; /* Adjust space between grid items */
+        width: 100%;
+        max-width: 1200px;
+        padding: 0;
+      }
+      /* Image Card Styles */
+      .sub-section {
+        background: #fff;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        opacity: 0;
+        transform: translateY(50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 300px; /* Ensure this height fits well with the images */
+        box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+      }
+      
+      
+
+      .sub-section img {
+        width: 100%;
+        height: 70%;
+        object-fit: cover; /* Ensures the image covers the container while maintaining its aspect ratio */
+        display: block; /* Removes extra space below images */
+        border-radius: 15px; /* Optional: add rounded corners to images */
+        box-sizing: border-box; /* Ensure padding doesn't cause overflow */
+      }
+      
+      
+
+      .sub-section p {
+        margin: 10px 0 0; /* Add margin to space out text from image */
+        text-align: center; /* Center text horizontally */
+        font-family: Gabriola;
+      }
+      p {
+        font-family: Gabriola;
+      }
+
+      /* Sequential Animations */
+      .sub-section:nth-of-type(1).active {
+        animation: fadeInUp 0.5s ease-in-out forwards;
+      }
+
+      .sub-section:nth-of-type(2).active {
+        animation: fadeInUp 0.5s ease-in-out 0.5s forwards;
+      }
+
+      .sub-section:nth-of-type(3).active {
+        animation: fadeInUp 0.5s ease-in-out 1s forwards;
+      }
+
+      .sub-section:nth-of-type(4).active {
+        animation: fadeInUp 0.5s ease-in-out 1.5s forwards;
+      }
+
+      .sub-section:nth-of-type(5).active {
+        animation: fadeInUp 0.5s ease-in-out 2s forwards;
+      }
+
+      .sub-section:nth-of-type(6).active {
+        animation: fadeInUp 0.5s ease-in-out 2.5s forwards;
+      }
+
+      .sub-section:nth-of-type(7).active {
+        animation: fadeInUp 0.5s ease-in-out 3s forwards;
+      }
+
+      .sub-section:nth-of-type(8).active {
+        animation: fadeInUp 0.5s ease-in-out 3.5s forwards;
+      }
+
+      .sub-section:nth-of-type(9).active {
+        animation: fadeInUp 0.5s ease-in-out 4s forwards;
+      }
+/* Style the love button container */
+.love-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    width: 100%; /* Ensure the container takes full width */
+    height: 150px; /* Adjust height as needed */
+    position: relative;
+    margin-top: 60px;
+  }
+  
+  /* Style the love button */
+  .love-button {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, #ff6b6b, #ff9a8b);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Add shadow */
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  /* Heart shape with pseudo-elements */
+  .love-button:before,
+  .love-button:after {
+    content: '';
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+  }
+  
+  .love-button:before {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  
+  .love-button:after {
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  
+  /* Style the button text */
+  .love-button span {
+    position: relative;
+    color: white;
+    font-size: 14px; /* Adjust font size as needed */
+    text-align: center;
+    padding: 10px;
+    width: 100%; /* Ensure text container takes full width */
+    height: 100%; /* Ensure text container takes full height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    z-index: 1; /* Ensure text is above the heart background */
+  }
+  
+  /* Hover and active animations */
+  .love-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  }
+  
+  .love-button:active {
+    transform: scale(1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    animation: bounce 0.6s;
+  }
+  
+  /* Bounce animation */
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-30px);
+    }
+    60% {
+      transform: translateY(-15px);
+    }
+  }
+  
+
+  
+  
+      /* Keyframes for Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50%);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Styles for Mobile */
+      @media (max-width: 768px) {
+        .section-2 {
+          flex-direction: column;
+        }
+
+        .box-shadow-container {
+          flex-direction: column;
+          padding: 0 5%;
+        }
+
+        .image-container,
+        .quote-card {
+          width: 100%;
+          margin: 0;
+        }
+
+        .quote-card {
+          margin: 10px 0;
+        }
+
+        .section-3 {
+          width: 80%;
+          max-width: 100%;
+          transform: translate(-50%, -50%);
+        }
+        .section-4 {
+            height: auto; /* Increase height for mobile view */
+            width: auto; /* Ensure full viewport width */
+            padding: 20px; /* Adjust padding if needed */
+          }
+        
+          .section-content {
+            grid-template-columns: repeat(3, 1fr); /* Adjust grid for smaller screens if needed */
+            grid-gap: 10px; /* Reduce gap if necessary */
+          }
+          .sub-section p {
+            font-size: 8px;
+          }
+          .sub-section {
+            height: auto; /* Allow sub-sections to adjust height as needed */
+          }
+      }
+
+      @media (max-width: 480px) {
+        .section-template[data-type="section-1"] .content {
+          padding: 10px;
+        }
+
+        .quote-card {
+          padding: 10px;
+        }
+
+        .section-3,
+        .section-4 {
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="bgAudio" src="simpplelove.mp3" autoplay loop></audio>
+    <div class="section section-template" data-type="section-1">
+      <div class="content">
+        <img src="img/IMG-20240803-WA0020.jpg" alt="Image" />
+        <h1 style="color: black;">Happy Birthday, My Love!</h1>
+        <p style="font-size: 25px;color: black;">
+          You are the light of my life and the love of my heart. On your special
+          day, I want you to know how grateful I am for every moment with you.
+        </p>
+        <p style="font-size: 50px;color: black;">Scroll down to explore more...</p>
+      </div>
+    </div>
+
+    <div class="section section-template" data-type="section-2">
+      <div class="box-shadow-container">
+        <div class="image-container">
+          <img src="img/IMG-20240803-WA0013.jpg" alt="Left Image" />
+        </div>
+        <div class="quote-card">
+          <div class="image-container">
+            <img src="img/IMG-20240803-WA0018.jpg" alt="Left Image" />
+          </div>
+        </div>
+        <div class="section-3">
+            <p>
+              <div class="image-container">
+                <img src="img/IMG-20240803-WA0018.jpg" alt="Left Image" />
+              </div>
+              Every moment spent with you is like a beautiful dream come true.
+              Happy Birthday, my heart!
+            </p>
+        </div>
+    </div>
+    </div>
+
+    <div class="section section-template" data-type="section-2">
+        <div class="box-shadow-container">
+            <div class="quote-card">
+                <p>
+              <div class="image-container">
+                <img src="img/IMG-20240803-WA0026.jpg" alt="Left Image" />
+              </div>
+            To the person who makes my heart skip a beat—Happy Birthday! May
+            your day be filled with all the love and joy you bring to my life.
+          </p>
+        </div>
+        <div class="image-container">
+          <img src="img/IMG-20240803-WA0025_1.jpg" alt="Left Image" />
+        </div>
+        <div class="section-3" style="background:-moz-linear-gradient();">
+          <h2>You are my forever and always. Happy Birthday Preethi!</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-template" data-type="section-4">
+      <div class="section-content">
+        <div class="sub-section">
+          <img src="img/IMG-20240803-WA0019.jpg" alt="Image 1" />
+          <p>
+            Happy Birthday to the love of my life! You make every day brighter
+            and every moment sweeter.
+          </p>
+        </div>
+        <div class="sub-section">
+          <img src="img/IMG-20240803-WA0029.jpg" alt="Image 2" />
+          <p>
+            Wishing you a birthday as beautiful and wonderful as you are. I love
+            you more than words can say!
+          </p>
+        </div>
+        <div class="sub-section">
+          <img src="img/IMG-20240803-WA0017.jpg" alt="Image 3" />
+          <p>
+            With you, every day feels like a celebration. Happy Birthday, my
+            darling!
+          </p>
+        </div>
+        <div class="sub-section">
+          <img src="img/IMG-20240803-WA0015.jpg" alt="Image 4" />
+          <p>
+            May your special day be filled with all the love and happiness you
+            bring into my life.
+          </p>
+        </div>
+        <div class="sub-section">
+          <img src="img/IMG-20240803-WA0027.jpg" alt="Image 5" />
+          <p>To my dearest love—Happy Birthday! You are my heart and soul.</p>
+        </div>
+        <div class="sub-section">
+          <img src="img/IMG-20240803-WA0029.jpg" alt="Image 6" />
+          <p>
+            On your birthday, I want you to know how deeply you are loved and
+            cherished. Have a magical day!
+          </p>
+        </div>
+        <div class="sub-section">
+          <img src="img/IMG-20240803-WA0023.jpg" alt="Image 7" />
+          <p>
+            Here's to celebrating you today and always. Happy Birthday, my love!
+          </p>
+        </div>
+        <div class="sub-section">
+          <img src="img/IMG-20240803-WA0019.jpg" alt="Image 8" />
+          <p>
+            Every birthday with you is a gift. Thank you for being the light of
+            my life.
+          </p>
+        </div>
+        <div class="sub-section">
+          <img src="img/IMG-20240803-WA0026.jpg" alt="Image 9" />
+          <p>
+            Happy Birthday to my one and only. You make every day a dream come
+            true.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div>
+
+        <div class="section-button">
+            <div class="love-button-container">
+              <button class="love-button">
+                <a href="http://localhost/birthday%20wish/tree.html">
+                  <span>Click me for a Surprise Gift!</span>
+                </a>
+              </button>
+            </div>
+          </div>
+          
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var audio = document.getElementById("bgAudio");
+            // Unmute after page interaction
+            audio.play();
+          });
+      document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll(".section-template");
+        const section4 = document.querySelector('[data-type="section-4"]');
+        const subSections = section4.querySelectorAll(".sub-section");
+
+        let scrollTimeout;
+
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.5,
+        };
+
+        const handleIntersection = (entries, observer) => {
+          clearTimeout(scrollTimeout);
+
+          scrollTimeout = setTimeout(() => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                if (entry.target.dataset.type === "section-2") {
+                  const section2 = entry.target;
+                  const index = Array.from(sections).indexOf(section2);
+                  const section3 = section2.querySelector(".section-3");
+
+                  if (section3) {
+                    const imageContainer =
+                      section2.querySelector(".image-container");
+                    const quoteCard = section2.querySelector(".quote-card");
+
+                    imageContainer.style.transform = "translateX(-100%)";
+                    imageContainer.style.opacity = "0";
+                    quoteCard.style.transform = "translateX(100%)";
+                    quoteCard.style.opacity = "0";
+
+                    setTimeout(() => {
+                      section3.style.transform = "translate(-50%, -50%)";
+                      section3.style.opacity = "1";
+                    }, 300);
+                  }
+                }
+
+                if (entry.target.dataset.type === "section-4") {
+                  section4.classList.add("active");
+                  subSections.forEach((subSection) => {
+                    subSection.classList.add("active");
+                  });
+                }
+              } else {
+                if (entry.target.dataset.type === "section-2") {
+                  const section2 = entry.target;
+                  const section3 = section2.querySelector(".section-3");
+
+                  if (section3) {
+                    section3.style.opacity = "0";
+                    section3.style.transform = "translate(-50%, 200%)";
+
+                    setTimeout(() => {
+                      const imageContainer =
+                        section2.querySelector(".image-container");
+                      const quoteCard = section2.querySelector(".quote-card");
+                      imageContainer.style.transform = "translateX(0)";
+                      imageContainer.style.opacity = "1";
+                      quoteCard.style.transform = "translateX(0)";
+                      quoteCard.style.opacity = "1";
+                    }, 300);
+                  }
+                }
+
+                if (entry.target.dataset.type === "section-4") {
+                  section4.classList.remove("active");
+                  subSections.forEach((subSection) => {
+                    subSection.classList.remove("active");
+                  });
+                }
+              }
+            });
+          }, 300);
+        };
+
+        const observer = new IntersectionObserver(
+          handleIntersection,
+          observerOptions
+        );
+
+        sections.forEach((section) => observer.observe(section));
+      });
+    </script>
+  </body>
+</html>

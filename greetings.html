@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="img/love.ico" />
+    <title>Greetings</title>
+    <style>
+      /* General Styles */
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f89ed6;
+        overflow: hidden;
+      }
+
+      .container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .girl-dp {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        background-image: url("img/nobita.webp"); /* Update with actual path */
+        background-size: cover;
+        background-position: center;
+        object-fit: cover;
+      }
+
+      .rose-petal {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-size: cover;
+        opacity: 0;
+      }
+
+      .container-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 600px;
+        height: 70%;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.8),
+          rgba(255, 255, 255, 0)
+        );
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        opacity: 0;
+        text-align: center;
+      }
+
+      .container-content h1,
+      .container-content p {
+        margin: 0;
+        padding: 0;
+      }
+
+      .nine {
+        position: bottom;
+      }
+
+      /* Styles for the button in class nine */
+      .nine button {
+        background-color: #ff4081; /* Bright pink background */
+        border: none; /* Remove default border */
+        color: white; /* White text color */
+        padding: 10px 20px; /* Add some padding */
+        font-size: 16px; /* Increase font size */
+        border-radius: 5px; /* Rounded corners */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+      }
+
+      .nine button:hover {
+        background-color: #e33571; /* Darker pink on hover */
+        transform: scale(1.05); /* Slightly enlarge the button */
+      }
+
+      .nine button a {
+        color: white; /* Ensure link text is white */
+        text-decoration: none; /* Remove underline from link */
+      }
+
+      .container-content div {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .wish-hbd {
+        font-size: 24px;
+        color: #ff4081; /* Or any color that matches your theme */
+        font-weight: bold;
+      }
+
+      #wishText {
+        font-size: 18px;
+        color: #333; /* Adjust color as needed */
+        margin-top: 10px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .wish-hbd,
+      #wishText {
+        animation: fadeIn 2s ease-in-out;
+      }
+
+      /* Responsive Styles */
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .girl-dp {
+          width: 100px;
+          height: 100px;
+        }
+
+        .container-content {
+          width: 95%;
+          padding: 15px;
+        }
+
+        .nine button {
+          padding: 8px 16px;
+          font-size: 14px;
+        }
+
+        .nine button a {
+          font-size: 14px; /* Ensure link text size is consistent */
+        }
+      }
+
+      @media (max-width: 480px) {
+        .girl-dp {
+          width: 80px;
+          height: 80px;
+        }
+
+        .container-content {
+          width: 100%;
+          padding: 10px;
+          font-size: 10px;
+        }
+
+        .nine button {
+          padding: 6px 12px;
+          font-size: 8px;
+        }
+
+        .nine button a {
+          font-size: 12px; /* Ensure link text size is consistent */
+        }
+      }
+
+      /* Keyframe animation for falling petals */
+      @keyframes fall {
+        0% {
+          transform: translateY(-100vh);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <audio id="bgAudio" src="simpplelove.mp3" autoplay loop></audio>
+      <!-- Continuous shower of rose petals -->
+      <div id="rose-petals-container"></div>
+
+      <div class="container-content" id="content-container">
+        <div class="one"><h1>To My Dearest Preethi</h1></div>
+        <br />
+        <div class="two">
+          <p>Every moment with you fills my heart with happiness.</p>
+        </div>
+        <div class="three">
+          <p>
+            Today is all about celebrating the incredible person you are! 🎉🎉🎉
+          </p>
+        </div>
+        <div class="four">
+          <div class="text-box">
+            <p class="hbd-chatbox">
+              Happy Birthday to the person who makes every day so special. Your
+              love and kindness light up my life in ways words can't fully
+              capture. Here’s to celebrating you and all the joy you bring into
+              my world!
+            </p>
+            <p class="fake-btn">All My Love</p>
+          </div>
+        </div>
+
+        <div class="five">
+          <p class="idea-1">I had a plan for today,</p>
+          <p class="idea-2">but then I realized,</p>
+          <p class="idea-3">
+            What I truly wanted was to make this day
+            <strong>extraordinary</strong> for you.
+          </p>
+          <p class="idea-4">Because,</p>
+          <p class="idea-5">You deserve the very best <span>:)</span></p>
+          <p class="idea-6"><span>🎉</span><span>🎂</span><span>🎉</span></p>
+        </div>
+
+        <div class="six">
+          <img
+            src="img/nobita.webp"
+            alt="Nobita Image"
+            class="girl-dp"
+            id="imagePath"
+          />
+          <div class="wish">
+            <h3 class="wish-hbd">Happy Birthday, Preethi !</h3>
+            <h5 id="wishText">
+              On your special day, I want to remind you just how much you mean
+              to me. Every moment with you is a treasure, and I’m grateful for
+              every day we share. Here’s to more laughter, more love, and more
+              adventures together. You are my everything. With all my love,
+              <strong>Preethi</strong>
+            </h5>
+          </div>
+        </div>
+
+        <div class="eight">
+          <!-- Heart SVG animation -->
+          <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="20" />
+          </svg>
+        </div>
+        <div class="nine">
+          <p></p>
+          <button>
+            <a href="http://localhost/birthday%20wish/slider.html">
+              Click Me!</a
+            >
+          </button>
+        </div>
+      </div>
+      <div class="seven">
+        <div class="baloons">
+          <img src="img/balloon.svg" alt="" />
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var audio = document.getElementById("bgAudio");
+        // Unmute after page interaction
+        audio.play();
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        // Continuous shower of rose petals
+        const petalCount = 50;
+        const container = document.getElementById("rose-petals-container");
+        for (let i = 0; i < petalCount; i++) {
+          const petal = document.createElement("img");
+          petal.src = "img/love.ico"; // Ensure this path is correct
+          petal.className = "rose-petal";
+          petal.style.left = Math.random() * 100 + "vw";
+          petal.style.top = Math.random() * 100 + "vh";
+          petal.style.animation = `fall 5s linear ${
+            Math.random() * 5
+          }s infinite`;
+          container.appendChild(petal);
+        }
+
+        // Animation timeline
+        const contentContainer = document.getElementById("content-container");
+        const delay = 0.5; // Delay between each text element appearing
+
+        // Show container content
+        setTimeout(() => {
+          contentContainer.style.opacity = "1";
+          contentContainer.style.transition = "opacity 1s ease";
+          const texts = contentContainer.querySelectorAll("div");
+          texts.forEach((text, index) => {
+            setTimeout(() => {
+              text.style.opacity = "1";
+              text.style.transform = "translateY(0)";
+            }, index * delay * 1000);
+          });
+        }, 1000); // Delay before showing container content
+      });
+
+      // Keyframe animation for falling petals
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes fall {
+                0% { transform: translateY(-100vh); opacity: 1; }
+                100% { transform: translateY(100vh); opacity: 0; }
+            }
+        `;
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>
